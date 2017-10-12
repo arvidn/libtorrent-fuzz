@@ -42,7 +42,7 @@ running
 
 To run the fuzzer::
 
-	b2 darwin-stable link=static logging=off -j4
+	b2 darwin-6.0 link=static logging=off -j4
 
 By default, 900000 iterations are run per API. This can be adjusted in the Jamfile_.
 
