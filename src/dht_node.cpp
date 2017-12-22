@@ -72,22 +72,24 @@ struct obs : dht::dht_observer
 #else
 	bool on_dht_request(char const* query, int query_len
 			, dht::msg const& request, entry& response) override { return false; }
+	address external_address() override { return address(); }
 #endif
 
+#ifndef TORRENT_DISABLE_LOGGING
 #if LIBTORRENT_VERSION_NUM < 10200
 
 	void log_packet(message_direction_t dir, char const* pkt, int len
 		, udp::endpoint node) override {}
-	address external_address() override { return address(); }
 
-#elif !defined TORRENT_DISABLE_LOGGING
+#else
 
 	bool should_log(module_t) const override { return true; }
 	void log(dht_logger::module_t, char const*, ...) override {}
 	void log_packet(message_direction_t
 		, span<char const>
 		, lt::udp::endpoint const&) override {}
-#endif
+#endif // LIBTORRENT_VERSION_NUM
+#endif // TORRENT_DISABLE_LOGGING
 };
 
 obs o;

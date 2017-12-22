@@ -24,6 +24,8 @@ project fuzz-tests
 	<export-extra>on
 	<define>TORRENT_USE_ASSERTS=1
 	<define>TORRENT_USE_IPV6=1
+	<define>_SCL_SECURE=1
+	<define>_GLIBCXX_DEBUG
 	<library>/torrent//torrent/<debug-iterators>on/<export-extra>on/<asserts>on
 	: default-build
 	<link>static
