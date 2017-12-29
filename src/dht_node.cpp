@@ -76,6 +76,9 @@ struct obs : dht::dht_observer
 #endif
 
 #ifndef TORRENT_DISABLE_LOGGING
+
+	void log(dht_logger::module_t, char const*, ...) override {}
+
 #if LIBTORRENT_VERSION_NUM < 10200
 
 	void log_packet(message_direction_t dir, char const* pkt, int len
@@ -84,7 +87,6 @@ struct obs : dht::dht_observer
 #else
 
 	bool should_log(module_t) const override { return true; }
-	void log(dht_logger::module_t, char const*, ...) override {}
 	void log_packet(message_direction_t
 		, span<char const>
 		, lt::udp::endpoint const&) override {}
