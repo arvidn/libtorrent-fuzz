@@ -35,11 +35,11 @@ project fuzz-tests
 # run this with as many sanitizers as possible
 	<san>address
 	<san>undefined
-   ;
+	;
 
-run src/torrent_info.cpp          : -runs=9000000 -timeout=10 -artifact_prefix=./torrent_info- corpus/torrents ;
+run src/torrent_info.cpp          : -runs=9000000 -timeout=10 -rss_limit_mb=6096 -artifact_prefix=./torrent_info- corpus/torrents ;
 run src/parse_magnet_uri.cpp      : -runs=9000000 -timeout=10 -artifact_prefix=./parse_magnet_uri- corpus/magnetlinks ;
-run src/bdecode_node.cpp          : -runs=9000000 -timeout=10 -artifact_prefix=./bdecode_node- corpus/torrents ;
+run src/bdecode_node.cpp          : -runs=9000000 -timeout=10 -rss_limit_mb=4096 -artifact_prefix=./bdecode_node- corpus/torrents ;
 run src/parse_int.cpp             : -runs=9000000 -timeout=10 -artifact_prefix=./parse_int- corpus/parse_int ;
 run src/sanitize_path.cpp         : -runs=9000000 -timeout=10 -artifact_prefix=./sanitize_path- corpus/sanitize_path ;
 run src/escape_path.cpp           : -runs=9000000 -timeout=10 -artifact_prefix=./escape_path- corpus/escape_path ;
@@ -58,3 +58,4 @@ run src/utf8_codepoint.cpp        : -runs=9000000 -timeout=10 -artifact_prefix=.
 run src/http_parser.cpp           : -runs=9000000 -timeout=10 -artifact_prefix=./http_parser- corpus/http ;
 run src/upnp.cpp                  : -runs=9000000 -timeout=10 -artifact_prefix=./upnp- corpus/xml ;
 run src/dht_node.cpp              : -runs=9000000 -timeout=10 -artifact_prefix=./dht_node- corpus/dht ;
+run src/utp.cpp                   : -runs=9000000 -timeout=10 -rss_limit_mb=6096 -artifact_prefix=./utp- corpus/utp ;
