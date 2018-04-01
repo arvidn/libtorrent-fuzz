@@ -64,24 +64,28 @@ utp_socket_manager man(
 
 extern "C" int LLVMFuzzerTestOneInput(uint8_t const* data, size_t size)
 {
-	utp_stream str(ios);
+	utp_socket_impl* sock = NULL;
+	{
+		utp_stream str(ios);
 #if LIBTORRENT_VERSION_NUM >= 10200
-	utp_socket_impl* sock = construct_utp_impl(1, 0, &str, man);
+		sock = construct_utp_impl(1, 0, &str, man);
 #else
-	utp_socket_impl* sock = construct_utp_impl(1, 0, &str, &man);
+		sock = construct_utp_impl(1, 0, &str, &man);
 #endif
-	str.set_impl(sock);
-	udp::endpoint ep;
-	time_point ts(seconds(100));
+		str.set_impl(sock);
+		udp::endpoint ep;
+		time_point ts(seconds(100));
 #if LIBTORRENT_VERSION_NUM >= 10200
-	span<char const> buf(reinterpret_cast<char const*>(data), size);
-	utp_incoming_packet(sock, buf, ep, ts);
+		span<char const> buf(reinterpret_cast<char const*>(data), size);
+		utp_incoming_packet(sock, buf, ep, ts);
 #else
-	utp_incoming_packet(sock, reinterpret_cast<char const*>(data), size, ep, ts);
+		utp_incoming_packet(sock, reinterpret_cast<char const*>(data), size, ep, ts);
 #endif
 
-	// clear any deferred acks
-	man.socket_drained();
+		// clear any deferred acks
+		man.socket_drained();
+	}
+	delete_utp_impl(sock);
 	return 0;
 }
 

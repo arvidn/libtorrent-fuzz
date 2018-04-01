@@ -6,6 +6,7 @@
 # the fuzzing with the included corpus though
 
 import feature : feature ;
+import testing ;
 
 use-project /torrent : libtorrent ;
 
