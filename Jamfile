@@ -41,6 +41,7 @@ project fuzz-tests
 run src/torrent_info.cpp          : -runs=9000000 -timeout=10 -rss_limit_mb=6096 -artifact_prefix=./torrent_info- corpus/torrents ;
 run src/parse_magnet_uri.cpp      : -runs=9000000 -timeout=10 -artifact_prefix=./parse_magnet_uri- corpus/magnetlinks ;
 run src/bdecode_node.cpp          : -runs=9000000 -timeout=10 -rss_limit_mb=4096 -artifact_prefix=./bdecode_node- corpus/torrents ;
+run src/lazy_bdecode.cpp          : -runs=9000000 -timeout=10 -rss_limit_mb=4096 -artifact_prefix=./lazy_bdecode- corpus/torrents ;
 run src/parse_int.cpp             : -runs=9000000 -timeout=10 -artifact_prefix=./parse_int- corpus/parse_int ;
 run src/sanitize_path.cpp         : -runs=9000000 -timeout=10 -artifact_prefix=./sanitize_path- corpus/sanitize_path ;
 run src/escape_path.cpp           : -runs=9000000 -timeout=10 -artifact_prefix=./escape_path- corpus/escape_path ;
