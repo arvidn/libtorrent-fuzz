@@ -61,3 +61,4 @@ run src/http_parser.cpp           : -runs=9000000 -timeout=10 -artifact_prefix=.
 run src/upnp.cpp                  : -runs=9000000 -timeout=10 -artifact_prefix=./upnp- corpus/xml ;
 run src/dht_node.cpp              : -runs=9000000 -timeout=10 -artifact_prefix=./dht_node- corpus/dht ;
 run src/utp.cpp                   : -runs=9000000 -timeout=10 -rss_limit_mb=6096 -artifact_prefix=./utp- corpus/utp ;
+run src/resume_data.cpp           : -runs=9000000 -timeout=10 -rss_limit_mb=6096 -artifact_prefix=./resume- corpus/resume ;
