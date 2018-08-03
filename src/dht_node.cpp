@@ -56,6 +56,8 @@ struct obs : dht::dht_observer
 	void set_external_address(lt::aux::listen_socket_handle const&, lt::address const& /* addr */
 		, lt::address const&) override
 	{}
+	int get_listen_port(aux::transport ssl, aux::listen_socket_handle const& s) override
+	{ return 6881; }
 #else
 	void set_external_address(address const& addr
 		, address const& source) override {}

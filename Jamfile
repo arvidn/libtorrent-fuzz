@@ -27,6 +27,8 @@ project fuzz-tests
 	<define>TORRENT_USE_IPV6=1
 	<define>_SCL_SECURE=1
 	<define>_GLIBCXX_DEBUG
+	<cxxflags>-fno-omit-frame-pointer
+	<linkflags>-fno-omit-frame-pointer
 	<library>/torrent//torrent/<debug-iterators>on/<export-extra>on/<asserts>on
 	: default-build
 	<link>static
@@ -36,6 +38,7 @@ project fuzz-tests
 # run this with as many sanitizers as possible
 	<san>address
 	<san>undefined
+#	<san>memory
 	;
 
 run src/torrent_info.cpp          : -runs=9000000 -timeout=10 -rss_limit_mb=6096 -artifact_prefix=./torrent_info- corpus/torrents ;
