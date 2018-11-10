@@ -13,10 +13,9 @@ use-project /torrent : libtorrent ;
 feature fuzz : off on : composite propagated link-incompatible ;
 feature.compose <fuzz>on : <cflags>-fsanitize=fuzzer <linkflags>-fsanitize=fuzzer ;
 
-feature san : off address memory undefined thread : composite propagated link-incompatible ;
-feature.compose <san>undefined : <cflags>-fsanitize=undefined <cflags>-fsanitize-undefined-trap-on-error <linkflags>-fsanitize=undefined <linkflags>-fsanitize-undefined-trap-on-error ;
+feature san : off on memory thread : composite propagated link-incompatible ;
+feature.compose <san>on : <cflags>-fsanitize=address <linkflags>-fsanitize=address <cflags>-fsanitize=undefined <cflags>-fsanitize-undefined-trap-on-error <linkflags>-fsanitize=undefined <linkflags>-fsanitize-undefined-trap-on-error ;
 feature.compose <san>thread : <cflags>-fsanitize=thread <linkflags>-fsanitize=thread ;
-feature.compose <san>address : <cflags>-fsanitize=address <linkflags>-fsanitize=address ;
 feature.compose <san>memory : <cflags>-fsanitize=memory <linkflags>-fsanitize=memory ;
 
 project fuzz-tests
@@ -36,8 +35,7 @@ project fuzz-tests
 	<debug-symbols>on
 
 # run this with as many sanitizers as possible
-	<san>address
-	<san>undefined
+	<san>on
 #	<san>memory
 	;
 
