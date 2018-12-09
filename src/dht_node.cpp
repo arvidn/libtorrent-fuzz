@@ -119,7 +119,7 @@ extern "C" int LLVMFuzzerTestOneInput(uint8_t const* data, size_t size)
 #else
 		, dht::dht_default_storage_constructor
 #endif
-		, state);
+		, std::move(state));
 
 	return 0;
 }

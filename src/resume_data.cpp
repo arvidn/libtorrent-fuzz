@@ -41,7 +41,7 @@ extern "C" int LLVMFuzzerTestOneInput(uint8_t const* data, size_t size)
 {
 #if LIBTORRENT_VERSION_NUM >= 10200
 	lt::error_code ec;
-	auto ret = lt::read_resume_data({reinterpret_cast<char const*>(data), size}, ec);
+	auto ret = lt::read_resume_data({reinterpret_cast<char const*>(data), int(size)}, ec);
 #endif
 	return 0;
 }
