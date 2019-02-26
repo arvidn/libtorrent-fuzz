@@ -39,7 +39,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 using namespace lt;
 
+#if LIBTORRENT_VERSION_NUM >= 10300
+io_context ios;
+#else
 io_service ios;
+#endif
 lt::aux::session_settings sett;
 counters cnt;
 

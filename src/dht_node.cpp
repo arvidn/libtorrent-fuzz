@@ -99,7 +99,11 @@ struct obs : dht::dht_observer
 obs o;
 extern "C" int LLVMFuzzerTestOneInput(uint8_t const* data, size_t size)
 {
+#if LIBTORRENT_VERSION_NUM >= 10300
+	io_context ios;
+#else
 	io_service ios;
+#endif
 #if LIBTORRENT_VERSION_NUM < 10200
 	rate_limited_udp_socket sock(ios);
 #endif

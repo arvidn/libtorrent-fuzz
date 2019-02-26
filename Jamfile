@@ -36,6 +36,9 @@ project fuzz-tests
 
 # run this with as many sanitizers as possible
 	<san>on
+
+# the memory sanitizer seems to cause failure exit codes without any fuzzer
+# error message
 #	<san>memory
 	;
 
