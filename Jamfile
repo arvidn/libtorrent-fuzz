@@ -13,12 +13,6 @@ use-project /torrent : libtorrent ;
 feature fuzz : off on : composite propagated link-incompatible ;
 feature.compose <fuzz>on : <cflags>-fsanitize=fuzzer <linkflags>-fsanitize=fuzzer ;
 
-sanitizer-flags = -fsanitize=address -fsanitize=undefined -fsanitize-undefined-trap-on-error -fsanitize=integer -fsanitize=implicit-conversion ;
-feature san : off on memory thread : composite propagated link-incompatible ;
-feature.compose <san>on : <cflags>$(sanitizer-flags) <linkflags>$(sanitizer-flags) ;
-feature.compose <san>thread : <cflags>-fsanitize=thread <linkflags>-fsanitize=thread ;
-feature.compose <san>memory : <cflags>-fsanitize=memory <linkflags>-fsanitize=memory ;
-
 project fuzzers
 	: requirements
 	<fuzz>on
@@ -29,19 +23,12 @@ project fuzzers
 	<define>_GLIBCXX_DEBUG
 	<cxxflags>-fno-omit-frame-pointer
 	<linkflags>-fno-omit-frame-pointer
-	<library>/torrent//torrent/<debug-iterators>on/<export-extra>on/<asserts>on
+	<library>/torrent//torrent/<debug-iterators>on/<export-extra>on/<asserts>on/<debug-symbols>on/<sanitize>on
 	: default-build
 	<link>static
 	<variant>release
 	<debug-symbols>on
 	<cxxstd>14
-
-# run this with as many sanitizers as possible
-	<san>on
-
-# the memory sanitizer seems to cause failure exit codes without any fuzzer
-# error message
-#	<san>memory
 	;
 
 local TARGETS ;
