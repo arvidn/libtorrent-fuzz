@@ -1,5 +1,5 @@
 
-COMMANDLINE=-runs=9000000 -timeout=10 -rss_limit_mb=6096
+COMMANDLINE="-runs=9000000 -timeout=10"
 
 function run
 {
@@ -9,7 +9,7 @@ function run
 run torrent_info torrents &
 run parse_magnet_uri magnetlinks &
 run bdecode_node torrents &
-run lazy_bdecode.cpp torrents &
+run lazy_bdecode torrents &
 run parse_int parse_int &
 run sanitize_path sanitize_path &
 run escape_path escape_path &
@@ -23,7 +23,7 @@ run verify_encoding utf8 &
 run convert_to_native utf8 &
 run convert_from_native utf8 &
 run utf8_wchar utf8 &
-run wchar_utf8.cpp utf8 &
+run wchar_utf8 utf8 &
 run utf8_codepoint utf8 &
 run http_parser http &
 run upnp xml &
